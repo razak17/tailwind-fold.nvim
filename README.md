@@ -3,8 +3,7 @@
 Neovim plugin to conceal long class attributes.
 
 # Installation
-
-## [Lazy](https://github.com/folke/lazy.nvim)
+- lazy.nvim:
 
 ```lua
 {
