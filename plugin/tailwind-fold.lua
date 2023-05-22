@@ -27,7 +27,7 @@ local conceal_class = function(bufnr)
 
 	local ts_query = vim.treesitter.query.parse(ft, query)
 
-	for _, captures, metadata in ts_query:iter_matches(root, bufnr, root:start(), root:end_()) do
+	for _, captures, metadata in ts_query:iter_matches(root, bufnr, root:start(), root:end_(), {}) do
 		local start_row, start_col, end_row, end_col = captures[2]:range()
 		if end_row - start_row == 0 then
 			api.nvim_buf_set_extmark(bufnr, namespace, start_row, start_col, {
