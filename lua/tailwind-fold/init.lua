@@ -1,6 +1,8 @@
 local api = vim.api
 
-local conceal_class = function(bufnr)
+local M = {}
+
+local conceal_class = function(bufnr, config)
 	local ft = "html"
 	if not vim.tbl_contains({ "html", "svelte", "astro", "vue" }, vim.bo.ft) then
 		ft = "tsx"
@@ -29,7 +31,9 @@ local conceal_class = function(bufnr)
 
 	for _, captures, metadata in ts_query:iter_matches(root, bufnr, root:start(), root:end_(), {}) do
 		local start_row, start_col, end_row, end_col = captures[2]:range()
-		if end_row - start_row == 0 then
+		local row_diff = end_row - start_row
+		local col_diff = end_col - start_col
+		if row_diff == 0 and col_diff > config.min_chars then
 			api.nvim_buf_set_extmark(bufnr, namespace, start_row, start_col, {
 				end_line = end_row,
 				end_col = end_col,
@@ -39,14 +43,32 @@ local conceal_class = function(bufnr)
 	end
 end
 
-api.nvim_create_autocmd({
-	"BufEnter",
-	"BufWritePost",
-	"TextChanged",
-	"InsertLeave",
-}, {
-	pattern = { "*.html", "*.svelte", "*.astro", "*.vue", "*.tsx" },
-	callback = function()
-		conceal_class(api.nvim_get_current_buf())
-	end,
-})
+function M.setup(config)
+	vim.validate({ config = { config, "table", true } })
+	if not config then
+		config = {}
+	end
+
+	local default_config = {
+		-- Only fold when class string char count is more than 30. Folds everything by default.
+		min_chars = 0,
+	}
+
+	config = vim.tbl_deep_extend("force", default_config, config)
+
+	api.nvim_create_autocmd({
+		"BufEnter",
+		"BufWritePost",
+		"TextChanged",
+		"InsertLeave",
+	}, {
+		pattern = { "*.html", "*.svelte", "*.astro", "*.vue", "*.tsx" },
+		callback = function()
+			conceal_class(api.nvim_get_current_buf(), config)
+		end,
+	})
+end
+
+M.setup()
+
+return M
