@@ -13,9 +13,17 @@ Requires [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
 ```lua
 {
   'razak17/tailwind-fold.nvim',
-  opts= {}
+  opts= {},
   dependencies = { 'nvim-treesitter/nvim-treesitter' },
   ft = { 'html', 'svelte', 'astro', 'vue', 'typescriptreact' },
+},
+```
+
+# Default Options
+```lua
+{
+  -- min chars to fold.
+  min_chars = 0,
 },
 ```
 
