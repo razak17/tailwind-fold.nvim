@@ -23,8 +23,8 @@ function M.setup(config)
 		"InsertLeave",
 	}, {
 		pattern = { "*.html", "*.svelte", "*.astro", "*.vue", "*.tsx" },
-		callback = function()
-			conceal_class(api.nvim_get_current_buf(), config)
+		callback = function(args)
+			conceal_class(args.buf, config)
 		end,
 	})
 end

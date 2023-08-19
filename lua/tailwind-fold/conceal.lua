@@ -3,6 +3,7 @@ local api = vim.api
 local M = {}
 
 function M.conceal_class(bufnr, config)
+  vim.opt_local.conceallevel = 2
 	local ft = "html"
 	if not vim.tbl_contains({ "html", "svelte", "astro", "vue" }, vim.bo.ft) then
 		ft = "tsx"
