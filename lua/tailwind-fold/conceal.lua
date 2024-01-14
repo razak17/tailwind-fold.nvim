@@ -23,7 +23,7 @@ function M.conceal_class(bufnr, config)
 	if ft == "tsx" then
 		query = [[
       ((jsx_attribute
-        (property_identifier) @att_name (#eq? @att_name "className")
+        (property_identifier) @att_name (#any-of? @att_name "className" "class")
         (string (string_fragment) @class_value) (#set! @class_value conceal "…")))
       ]]
 	end
