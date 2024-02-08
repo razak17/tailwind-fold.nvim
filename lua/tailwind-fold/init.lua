@@ -11,14 +11,12 @@ M.config = {
 
 M.enable = function()
 	M.config.enabled = true
-	vim.b.fold_enabled = true
 	vim.cmd("doautocmd TextChanged")
 end
 
 M.disable = function()
 	M.config.enabled = false
-	vim.b.fold_enabled = false
-  vim.opt_local.conceallevel = 0
+	vim.opt_local.conceallevel = 0
 end
 
 M.toggle = function()
@@ -33,20 +31,26 @@ function M.setup(config)
 	vim.validate({ config = { config, "table", true } })
 
 	M.config = vim.tbl_deep_extend("force", M.config, config or {})
-	vim.b.fold_enabled = M.config.enabled
 
 	api.nvim_create_autocmd({
 		"BufEnter",
+		"BufWritePre",
 		"BufWritePost",
 		"TextChanged",
 		"InsertLeave",
 	}, {
-		pattern = { "*.html", "*.svelte", "*.astro", "*.vue", "*.tsx" },
+		pattern = {
+			"*.html",
+			"*.svelte",
+			"*.astro",
+			"*.vue",
+			"*.tsx",
+			"*.php",
+		},
 		callback = function(args)
-			if not vim.b.fold_enabled then
-				return
+			if M.config.enabled then
+				conceal_class(args.buf, M.config)
 			end
-			conceal_class(args.buf, M.config)
 		end,
 	})
 

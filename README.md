@@ -15,7 +15,7 @@ Requires [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
   'razak17/tailwind-fold.nvim',
   opts= {},
   dependencies = { 'nvim-treesitter/nvim-treesitter' },
-  ft = { 'html', 'svelte', 'astro', 'vue', 'typescriptreact' },
+  ft = { 'html', 'svelte', 'astro', 'vue', 'typescriptreact', 'php', 'blade' },
 },
 ```
 # Showcase
