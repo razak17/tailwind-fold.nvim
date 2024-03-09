@@ -42,10 +42,8 @@ function M.setup(config)
 	M.config = vim.tbl_deep_extend("force", M.config, config or {})
 
 	local ft_to_pattern = {}
-	if M.config.ft ~= nil then
-		for _, ft in ipairs(M.config.ft) do
-			table.insert(ft_to_pattern, "*." .. ft)
-		end
+	for _, ft in ipairs(M.config.ft) do
+		table.insert(ft_to_pattern, "*." .. ft)
 	end
 
 	api.nvim_create_autocmd({
