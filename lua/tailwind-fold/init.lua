@@ -7,6 +7,15 @@ M.config = {
 	enabled = true,
 	-- Only fold when class string char count is more than 30. Folds everything by default.
 	min_chars = 0,
+	ft = {
+		"html",
+		"svelte",
+		"astro",
+		"vue",
+		"tsx",
+		"php",
+		"blade"
+	}
 }
 
 M.enable = function()
@@ -32,6 +41,13 @@ function M.setup(config)
 
 	M.config = vim.tbl_deep_extend("force", M.config, config or {})
 
+	local ft_to_pattern = {}
+	if M.config.ft ~= nil then
+		for _, ft in ipairs(M.config.ft) do
+			table.insert(ft_to_pattern, "*." .. ft)
+		end
+	end
+
 	api.nvim_create_autocmd({
 		"BufEnter",
 		"BufWritePre",
@@ -39,14 +55,7 @@ function M.setup(config)
 		"TextChanged",
 		"InsertLeave",
 	}, {
-		pattern = {
-			"*.html",
-			"*.svelte",
-			"*.astro",
-			"*.vue",
-			"*.tsx",
-			"*.php",
-		},
+		pattern = ft_to_pattern,
 		callback = function(args)
 			if M.config.enabled then
 				conceal_class(args.buf, M.config)
