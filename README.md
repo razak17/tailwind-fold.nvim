@@ -18,16 +18,41 @@ Requires [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
   ft = { 'html', 'svelte', 'astro', 'vue', 'typescriptreact', 'php', 'blade' },
 },
 ```
+
+- Astronvim
+
+```lua
+return {
+    'razak17/tailwind-fold.nvim',
+    opts = {},
+    dependencies = {'nvim-treesitter/nvim-treesitter'},
+    event = "VeryLazy",
+    config = function()
+        require('tailwind-fold').setup({ft = {'html', 'twig'}})
+    end
+}
+```
+
 # Showcase
 
 ![2023-05-11_202341_699860995](https://github.com/razak17/tailwind-fold.nvim/assets/52210954/7c876300-2625-48ff-9b98-8765f7dfd5e9)
 
 # Default Options
+
 ```lua
 {
-  enabled = true
-  -- min chars to fold.
-  min_chars = 0,
+	enabled = true,
+	-- Only fold when class string char count is more than 30. Folds everything by default.
+	min_chars = 0,
+	ft = {
+		"html",
+		"svelte",
+		"astro",
+		"vue",
+		"tsx",
+		"php",
+		"blade"
+	}
 },
 ```
 
