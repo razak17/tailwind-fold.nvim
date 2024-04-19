@@ -1,48 +1,34 @@
 local api = vim.api
-local conceal_class = require("tailwind-fold.conceal").conceal_class
+local conceal = require("tailwind-fold.conceal")
+local config = require("tailwind-fold.config")
 
 local M = {}
 
-M.config = {
-	enabled = true,
-	-- Only fold when class string char count is more than 30. Folds everything by default.
-	min_chars = 0,
-	ft = {
-		"html",
-		"svelte",
-		"astro",
-		"vue",
-		"tsx",
-		"php",
-		"blade"
-	}
-}
-
 M.enable = function()
-	M.config.enabled = true
+	config.options.enabled = true
 	vim.cmd("doautocmd TextChanged")
 end
 
 M.disable = function()
-	M.config.enabled = false
+	config.options.enabled = false
 	vim.opt_local.conceallevel = 0
 end
 
 M.toggle = function()
-	if M.config.enabled then
+	if config.options.enabled then
 		M.disable()
 	else
 		M.enable()
 	end
 end
 
-function M.setup(config)
-	vim.validate({ config = { config, "table", true } })
+function M.setup(options)
+	vim.validate({ options = { options, "table", true } })
 
-	M.config = vim.tbl_deep_extend("force", M.config, config or {})
+	config.options = vim.tbl_deep_extend("force", config.options, options or {})
 
 	local ft_to_pattern = {}
-	for _, ft in ipairs(M.config.ft) do
+	for _, ft in ipairs(config.options.ft) do
 		table.insert(ft_to_pattern, "*." .. ft)
 	end
 
@@ -51,16 +37,23 @@ function M.setup(config)
 		"BufWritePre",
 		"BufWritePost",
 		"TextChanged",
+		"TextChangedI",
 		"InsertLeave",
 	}, {
 		pattern = ft_to_pattern,
 		callback = function(args)
-			if M.config.enabled then
-				conceal_class(args.buf, M.config)
+			if config.options.enabled then
+				local ft = vim.bo.ft
+				if ft == "html" or ft == "php" or ft == "blade" then
+					conceal.html_conceal_class(args.buf)
+				else
+					conceal.conceal_class(args.buf)
+				end
 			end
 		end,
 	})
 
+	vim.api.nvim_set_hl(0, "TailwindFold", config.options.highlight)
 	api.nvim_create_user_command("TailwindFoldEnable", M.enable, {})
 	api.nvim_create_user_command("TailwindFoldDisable", M.disable, {})
 	api.nvim_create_user_command("TailwindFoldToggle", M.toggle, {})
