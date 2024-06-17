@@ -13,10 +13,12 @@ M.filetype_to_extension = {
 
 M.class_filetypes = {
 	"html",
+	"php",
+	"blade",
 	"eruby",
-  "vue",
-  "svelte",
-  "astro"
+	"vue",
+	"svelte",
+	"astro",
 }
 
 M.classname_filetypes = {
