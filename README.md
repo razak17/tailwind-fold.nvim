@@ -83,8 +83,12 @@ The plugin is activated automatically
 
 `:TailwindFoldDisable`, `:TailwindFoldEnable` and `:TailwindFoldToggle` are also available to change fold state.
 
+# Development and Contributions
+
+Feel free to open and issue or create a PR if a filetype you are using is not supported yet.
+
 # Resources and Acknowledgements
 
-All credit goes to the author of [this](https://gist.github.com/mactep/430449fd4f6365474bfa15df5c02d27b) gist, which makes this plugin possible
+All credit goes to the author of [this](https://gist.github.com/mactep/430449fd4f6365474bfa15df5c02d27b) gist, which made the initial version of this plugin possible.
 
 You can use it if you prefer not to install a plugin
