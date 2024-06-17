@@ -51,7 +51,8 @@ return {
 		"vue",
 		"tsx",
 		"php",
-		"blade"
+		"blade",
+		"eruby",
 	}
 },
 ```
