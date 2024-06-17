@@ -45,6 +45,12 @@ function M.setup(options)
 		callback = function(args)
 			if config.options.enabled then
 				local ft = vim.bo.ft
+
+				if not vim.tbl_contains(config.supported_filetypes, ft) then
+					vim.notify(ft .. " is not supported.", vim.log.levels.INFO, { title = "tailwind-fold" })
+					return
+				end
+
 				if vim.tbl_contains({ "php", "blade", "eruby" }, ft) then
 					conceal.html_conceal_class(args.buf)
 				else
