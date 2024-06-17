@@ -3,25 +3,11 @@ local parsers = require("nvim-treesitter.parsers")
 
 local M = {}
 
-local supported_filetypes = {
-	"html",
-	"css",
-	"php",
-	"twig",
-	"vue",
-	"svelte",
-	"astro",
-	"htmldjango",
-	"javascriptreact",
-	"typescriptreact",
-	"templ",
-}
-
 ---@param bufnr number
 ---@param all boolean?
 M.get_class_nodes = function(bufnr, all)
 	local ft = vim.bo[bufnr].ft
-	local fts = vim.tbl_extend("keep", config.options.ft, supported_filetypes)
+	local fts = vim.tbl_extend("keep", config.options.ft, config.supported_filetypes)
 	local results = {}
 
 	if not vim.tbl_contains(fts, ft) then

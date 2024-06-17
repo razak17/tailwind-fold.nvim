@@ -1,31 +1,48 @@
 local M = {}
 
+M.supported_filetypes = {
+	"astro",
+  "blade",
+  "eruby",
+	"html",
+	"htmldjango",
+	"javascriptreact",
+	"php",
+	"svelte",
+	"templ",
+	"typescriptreact",
+	"vue",
+}
+
 M.filetype_to_extension = {
-	html = "html",
-	svelte = "svelte",
-	astro = "astro",
-	vue = "vue",
-	typescriptreact = "tsx",
-	php = "php",
-	blade = "blade",
-	eruby = "erb",
+  astro = "astro",
+  blade = "blade.php",
+  eruby = "erb",
+  html = "html",
+  htmldjango = "html",
+  javascriptreact = "jsx",
+  php = "php",
+  svelte = "svelte",
 	templ = "templ",
+  typescriptreact = "tsx",
+  vue = "vue",
 }
 
 M.class_filetypes = {
-	"html",
-	"php",
-	"blade",
-	"eruby",
-	"vue",
-	"svelte",
-	"astro",
+  "astro",
+  "blade",
+  "eruby",
+  "html",
+	"htmldjango",
+  "php",
+  "svelte",
 	"templ",
+  "vue",
 }
 
 M.classname_filetypes = {
-	"tsx",
-	"jsx",
+  "javascriptreact",
+	"typescriptreact",
 }
 
 M.options = {
@@ -33,14 +50,14 @@ M.options = {
 	-- Only fold when class string char count is more than min_chars. Folds everything by default.
 	min_chars = 0,
 	ft = {
-		"html",
-		"svelte",
 		"astro",
-		"vue",
-		"typescriptreact",
-		"php",
 		"blade",
 		"eruby",
+		"html",
+		"php",
+		"svelte",
+		"typescriptreact",
+		"vue",
 	},
 	symbol = "…", -- 󱏿
 	highlight = {
