@@ -29,7 +29,8 @@ function M.setup(options)
 
 	local ft_to_pattern = {}
 	for _, ft in ipairs(config.options.ft) do
-		table.insert(ft_to_pattern, "*." .. ft)
+		local extension = config.filetype_to_extension[ft]
+		table.insert(ft_to_pattern, "*." .. extension)
 	end
 
 	api.nvim_create_autocmd({
@@ -44,7 +45,7 @@ function M.setup(options)
 		callback = function(args)
 			if config.options.enabled then
 				local ft = vim.bo.ft
-				if ft == "html" or ft == "php" or ft == "blade" then
+				if vim.tbl_contains({ "php", "blade" }, ft) then
 					conceal.html_conceal_class(args.buf)
 				else
 					conceal.conceal_class(args.buf)

@@ -9,6 +9,7 @@ function M.conceal_class(bufnr)
 	local class_nodes = utils.get_class_nodes(bufnr)
 
 	if not class_nodes then
+		vim.notify(vim.bo.ft .. " is not supported.", vim.log.levels.INFO, { title = "tailwind-fold" })
 		return
 	end
 
@@ -33,12 +34,22 @@ function M.conceal_class(bufnr)
 	end
 end
 
+-- NOTE: use this for just php and blade files. New implementation causes issues with those files.
 function M.html_conceal_class(bufnr)
 	vim.opt_local.conceallevel = 2
 
-	local ft = "html"
-	if not vim.tbl_contains(config.options.ft, vim.bo.ft) then
+	local ft
+	if vim.tbl_contains(config.class_filetypes, vim.bo.ft) then
+		ft = "html"
+	end
+
+	if vim.tbl_contains(config.classname_filetypes, vim.bo.ft) then
 		ft = "tsx"
+	end
+
+	if not ft then
+		vim.notify(vim.bo.ft .. " is not supported.", vim.log.levels.INFO, { title = "tailwind-fold" })
+		return
 	end
 
 	local namespace = vim.api.nvim_create_namespace("ConcealClassName")
