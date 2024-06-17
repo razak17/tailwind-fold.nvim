@@ -29,7 +29,7 @@ function M.setup(options)
 
 	local ft_to_pattern = {}
 	for _, ft in ipairs(config.options.ft) do
-		local extension = config.filetype_to_extension[ft]
+		local extension = config.filetype_to_extension[ft] or ft
 		table.insert(ft_to_pattern, "*." .. extension)
 	end
 

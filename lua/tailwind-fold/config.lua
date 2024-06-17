@@ -9,6 +9,7 @@ M.filetype_to_extension = {
 	php = "php",
 	blade = "blade",
 	eruby = "erb",
+	templ = "templ",
 }
 
 M.class_filetypes = {
@@ -19,6 +20,7 @@ M.class_filetypes = {
 	"vue",
 	"svelte",
 	"astro",
+	"templ",
 }
 
 M.classname_filetypes = {
