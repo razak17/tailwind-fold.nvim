@@ -45,7 +45,7 @@ function M.setup(options)
 		callback = function(args)
 			if config.options.enabled then
 				local ft = vim.bo.ft
-				if vim.tbl_contains({ "php", "blade" }, ft) then
+				if vim.tbl_contains({ "php", "blade", "eruby" }, ft) then
 					conceal.html_conceal_class(args.buf)
 				else
 					conceal.conceal_class(args.buf)

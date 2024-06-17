@@ -34,7 +34,7 @@ function M.conceal_class(bufnr)
 	end
 end
 
--- NOTE: use this for just php and blade files. New implementation causes issues with those files.
+-- NOTE: use this for just php, blade and eruby files. New implementation causes issues with those files.
 function M.html_conceal_class(bufnr)
 	vim.opt_local.conceallevel = 2
 
