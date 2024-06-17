@@ -14,6 +14,7 @@ local supported_filetypes = {
 	"htmldjango",
 	"javascriptreact",
 	"typescriptreact",
+	"templ",
 }
 
 ---@param bufnr number
