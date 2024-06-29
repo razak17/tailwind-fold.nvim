@@ -8,7 +8,7 @@ Requires [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
 
 # Installation
 
-- lazy.nvim:
+Using [lazy.nvim](https://github.com/folke/lazy.nvim) in lua
 
 ```lua
 {
@@ -17,6 +17,22 @@ Requires [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
   dependencies = { 'nvim-treesitter/nvim-treesitter' },
   ft = { 'html', 'svelte', 'astro', 'vue', 'typescriptreact', 'php', 'blade' },
 },
+```
+
+Using [vim-plug](https://github.com/junegunn/vim-plug) in vimscript
+
+```vim
+call plug#begin()
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'razak17/tailwind-fold.nvim'
+(...)
+call plug#end()
+
+lua << EOF
+  require("tailwind-fiold").setup {
+    ft = { 'html', 'svelte', 'astro', 'vue', 'typescriptreact', 'php', 'blade' },
+  }
+EOF
 ```
 
 - Astronvim
@@ -42,8 +58,6 @@ return {
 ```lua
 {
 	enabled = true,
-	-- Only fold when class string char count is more than 30. Folds everything by default.
-	min_chars = 0,
 	ft = {
 		"html",
 		"svelte",
