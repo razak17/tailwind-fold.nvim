@@ -58,6 +58,10 @@ return {
 ```lua
 {
 	enabled = true,
+    symbol = "…", -- 󱏿
+	highlight = {
+		fg = "#38BDF8", -- [[ symbol color ]]
+	},
 	ft = {
 		"html",
 		"svelte",
