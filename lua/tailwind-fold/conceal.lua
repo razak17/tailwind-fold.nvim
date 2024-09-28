@@ -56,18 +56,18 @@ local function html_conceal_class(bufnr)
 	local syntax_tree = language_tree:parse()
 	local root = syntax_tree[1]:root()
 
-	local query = [[
+	local query = string.format([[
     ((attribute
       (attribute_name) @att_name (#eq? @att_name "class")
-      (quoted_attribute_value (attribute_value) @class_value) (#set! @class_value conceal "…")))
-    ]]
+      (quoted_attribute_value (attribute_value) @class_value) (#set! @class_value conceal "%s")))
+    ]], config.options.symbol)
 
 	if ft == "tsx" then
-		query = [[
+		query = string.format([[
       ((jsx_attribute
         (property_identifier) @att_name (#any-of? @att_name "className" "class")
-        (string (string_fragment) @class_value) (#set! @class_value conceal "…")))
-      ]]
+        (string (string_fragment) @class_value) (#set! @class_value conceal "%s")))
+      ]], config.options.symbol)
 	end
 
 	local ts_query = vim.treesitter.query.parse(ft, query)
