@@ -33,30 +33,23 @@ function M.setup(options)
 		table.insert(ft_to_pattern, "*." .. extension)
 	end
 
-	api.nvim_create_autocmd({
-		"BufEnter",
-		"BufWritePre",
-		"BufWritePost",
-		"TextChanged",
-		"TextChangedI",
-		"InsertLeave",
-	}, {
-		pattern = ft_to_pattern,
-		callback = function(args)
-			if config.options.enabled then
-				local ft = vim.bo.ft
+	vim.g.tailwind_fold = {
+		conceal_ns = vim.api.nvim_create_namespace("conceal_class_name"),
+		conceal_au = vim.api.nvim_create_augroup("conceal_class_name", {}),
+		ft_to_pattern = ft_to_pattern,
+	}
 
-				if not vim.tbl_contains(config.supported_filetypes, ft) then
-					vim.notify(ft .. " is not supported.", vim.log.levels.INFO, { title = "tailwind-fold" })
-					return
-				end
+	vim.api.nvim_create_autocmd("BufEnter", {
+		group = vim.g.tailwind_fold.conceal_au,
+		pattern = vim.g.tailwind_fold.ft_to_pattern,
+		callback = function()
+			local ft = vim.bo.ft
 
-				if vim.tbl_contains({ "php", "blade", "eruby" }, ft) then
-					conceal.html_conceal_class(args.buf)
-				else
-					conceal.conceal_class(args.buf)
-				end
+			if not vim.tbl_contains(config.supported_filetypes, ft) then
+				vim.notify(ft .. " is not supported.", vim.log.levels.INFO, { title = "tailwind-fold" })
+				return
 			end
+			conceal.enable()
 		end,
 	})
 

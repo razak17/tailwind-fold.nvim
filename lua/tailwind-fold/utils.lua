@@ -32,8 +32,8 @@ M.get_class_nodes = function(bufnr, all)
 		if query then
 			for _, match in query:iter_matches(root, bufnr, 0, -1, { all = true }) do
 				results[#results + 1] = match[2][1] or match[2]
-			end
-		end
+      end
+    end
 	end)
 
 	return results

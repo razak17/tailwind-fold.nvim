@@ -71,6 +71,8 @@ return {
 		"php",
 		"blade",
 		"eruby",
+        "edge",
+        'htmldjango',
 	}
 },
 ```

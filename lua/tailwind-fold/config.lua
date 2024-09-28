@@ -26,6 +26,7 @@ M.filetype_to_extension = {
 	templ = "templ",
   typescriptreact = "tsx",
   vue = "vue",
+  edge = "edge",
 }
 
 M.class_filetypes = {
@@ -52,10 +53,13 @@ M.options = {
 	ft = {
 		"astro",
 		"blade",
+    "edge",
 		"eruby",
 		"html",
+	  "htmldjango",
 		"php",
 		"svelte",
+	  "templ",
 		"typescriptreact",
 		"vue",
 	},
