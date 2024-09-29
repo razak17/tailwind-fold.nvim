@@ -2,8 +2,8 @@ local M = {}
 
 M.supported_filetypes = {
 	"astro",
-  "blade",
-  "eruby",
+	"blade",
+	"eruby",
 	"html",
 	"htmldjango",
 	"javascriptreact",
@@ -15,34 +15,34 @@ M.supported_filetypes = {
 }
 
 M.filetype_to_extension = {
-  astro = "astro",
-  blade = "blade.php",
-  eruby = "erb",
-  html = "html",
-  htmldjango = "html",
-  javascriptreact = "jsx",
-  php = "php",
-  svelte = "svelte",
+	astro = "astro",
+	blade = "blade.php",
+	eruby = "erb",
+	html = "html",
+	htmldjango = "html",
+	javascriptreact = "jsx",
+	php = "php",
+	svelte = "svelte",
 	templ = "templ",
-  typescriptreact = "tsx",
-  vue = "vue",
-  edge = "edge",
+	typescriptreact = "tsx",
+	vue = "vue",
+	edge = "edge",
 }
 
 M.class_filetypes = {
-  "astro",
-  "blade",
-  "eruby",
-  "html",
+	"astro",
+	"blade",
+	"eruby",
+	"html",
 	"htmldjango",
-  "php",
-  "svelte",
+	"php",
+	"svelte",
 	"templ",
-  "vue",
+	"vue",
 }
 
 M.classname_filetypes = {
-  "javascriptreact",
+	"javascriptreact",
 	"typescriptreact",
 }
 
@@ -53,13 +53,13 @@ M.options = {
 	ft = {
 		"astro",
 		"blade",
-    "edge",
+		"edge",
 		"eruby",
 		"html",
-	  "htmldjango",
+		"htmldjango",
 		"php",
 		"svelte",
-	  "templ",
+		"templ",
 		"typescriptreact",
 		"vue",
 	},
@@ -67,6 +67,11 @@ M.options = {
 	highlight = {
 		fg = "#38BDF8",
 	},
+}
+
+M.state = {
+	enabled = false,
+	active_buffers = {},
 }
 
 return M

@@ -1,31 +1,14 @@
-local api = vim.api
 local conceal = require("tailwind-fold.conceal")
 local config = require("tailwind-fold.config")
 
 local M = {}
 
-M.enable = function()
-	config.options.enabled = true
-	vim.cmd("doautocmd TextChanged")
-end
-
-M.disable = function()
-	config.options.enabled = false
-	vim.opt_local.conceallevel = 0
-end
-
-M.toggle = function()
-	if config.options.enabled then
-		M.disable()
-	else
-		M.enable()
-	end
-end
-
 function M.setup(options)
 	vim.validate({ options = { options, "table", true } })
 
 	config.options = vim.tbl_deep_extend("force", config.options, options or {})
+
+	config.state.enabled = config.options.enabled
 
 	local ft_to_pattern = {}
 	for _, ft in ipairs(config.options.ft) do
@@ -49,14 +32,16 @@ function M.setup(options)
 				vim.notify(ft .. " is not supported.", vim.log.levels.INFO, { title = "tailwind-fold" })
 				return
 			end
-			conceal.enable()
+			if config.state.enabled then
+				conceal.enable()
+			end
 		end,
 	})
 
 	vim.api.nvim_set_hl(0, "TailwindFold", config.options.highlight)
-	api.nvim_create_user_command("TailwindFoldEnable", M.enable, {})
-	api.nvim_create_user_command("TailwindFoldDisable", M.disable, {})
-	api.nvim_create_user_command("TailwindFoldToggle", M.toggle, {})
+	vim.api.nvim_create_user_command("TailwindFoldEnable", conceal.enable, {})
+	vim.api.nvim_create_user_command("TailwindFoldDisable", conceal.disable, {})
+	vim.api.nvim_create_user_command("TailwindFoldToggle", conceal.toggle, {})
 end
 
 return M
