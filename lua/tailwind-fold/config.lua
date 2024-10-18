@@ -61,6 +61,7 @@ M.options = {
 		"svelte",
 		"templ",
 		"typescriptreact",
+		"javascriptreact",
 		"vue",
 	},
 	symbol = "…", -- 󱏿
