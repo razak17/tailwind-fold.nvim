@@ -30,9 +30,9 @@ end
 ---@return number[][]
 function M.find_class_ranges(bufnr, ft)
   local results = {}
-  local parser = vim.treesitter.get_parser(bufnr)
+  local ok, parser = pcall(vim.treesitter.get_parser, bufnr)
 
-  if not parser then
+  if not ok or not parser then
     -- vim.notify("No parser available for " .. ft)
     return results
   end
