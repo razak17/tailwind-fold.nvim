@@ -6,7 +6,7 @@
     (member_expression
       object: (identifier) @_object.ident)
   ]
-  (#any-of? @_ident "clsx" "classnames" "tw" "css")
+  (#match? @_ident "(clsx|classnames|t[vw]|css|cva)")
   (#eq? @_object.ident "tw")
   arguments: [
     ((arguments
