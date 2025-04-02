@@ -5,6 +5,7 @@ M.supported_filetypes = {
   "blade",
   "eruby",
   "html",
+  "htmlangular",
   "htmldjango",
   "javascriptreact",
   "php",
@@ -21,6 +22,7 @@ M.filetype_to_extension = {
   blade = "blade.php",
   eruby = "erb",
   html = "html",
+  htmlangular = "html",
   htmldjango = "html",
   javascriptreact = "jsx",
   php = "php",
@@ -31,25 +33,6 @@ M.filetype_to_extension = {
   typescriptreact = "tsx",
   vue = "vue",
   edge = "edge",
-}
-
-M.class_filetypes = {
-  "astro",
-  "blade",
-  "eruby",
-  "html",
-  "htmldjango",
-  "php",
-  "razor",
-  "cshtml",
-  "svelte",
-  "templ",
-  "vue",
-}
-
-M.classname_filetypes = {
-  "javascriptreact",
-  "typescriptreact",
 }
 
 M.treesitter = {
@@ -67,6 +50,7 @@ M.treesitter = {
   "svelte",
   "elixir",
   "eelixir",
+  "htmlangular",
   "htmldjango",
   "javascript",
   "typescript",
@@ -84,6 +68,7 @@ M.options = {
     "edge",
     "eruby",
     "html",
+    "htmlangular",
     "htmldjango",
     "php",
     "svelte",
