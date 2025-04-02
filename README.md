@@ -85,18 +85,6 @@ return {
 :TSInstall html
 ```
 
-- Make sure conceallevel is set to 2 in your config OR.
-
-```bash
-:set conceallevel=2
-```
-
-- Set concealcursor to an empty string to expand class when on cursorline:
-
-```bash
-:set concealcursor=
-```
-
 # Usage
 
 The plugin is activated automatically
