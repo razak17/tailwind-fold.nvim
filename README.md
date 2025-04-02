@@ -97,6 +97,9 @@ Feel free to open and issue or create a PR if a filetype you are using is not su
 
 # Resources and Acknowledgements
 
+- [tailwind-tools](https://github.com/luckasRanarison/tailwind-tools.nvim) (for treesitter queries and helper code)
+
+
 All credit goes to the author of [this](https://gist.github.com/mactep/430449fd4f6365474bfa15df5c02d27b) gist, which made the initial version of this plugin possible.
 
 You can use it if you prefer not to install a plugin
