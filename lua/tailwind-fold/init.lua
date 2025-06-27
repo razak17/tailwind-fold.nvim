@@ -4,7 +4,7 @@ local config = require("tailwind-fold.config")
 local M = {}
 
 function M.setup(options)
-	vim.validate({ options = { options, "table", true } })
+	vim.validate("options", options, "table", true)
 
 	config.options = vim.tbl_deep_extend("force", config.options, options or {})
 
