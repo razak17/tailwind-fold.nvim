@@ -28,6 +28,10 @@ function M.setup(options)
 		callback = function()
 			local ft = vim.bo.ft
 
+			if not vim.tbl_contains(config.options.ft, ft) then
+        return
+      end
+
 			if not vim.tbl_contains(config.supported_filetypes, ft) then
 				vim.notify(ft .. " is not supported.", vim.log.levels.INFO, { title = "tailwind-fold" })
 				return
