@@ -4,7 +4,7 @@
     (member_expression
       object: (identifier) @_object.ident)
   ]
-  (#match? @_ident "(clsx|classnames|t[vw]|css|cva)")
+  (#match? @_ident "(clsx|classnames|cn|t[vw]|css|cva)")
   (#eq? @_object.ident "tw")
   arguments: [
     ((arguments
