@@ -30,6 +30,10 @@ local function set_conceal(bufnr)
 end
 
 function M.enable()
+  if config.state.enabled and config.state.initialized then return end
+
+  local was_enabled = config.state.enabled
+
   vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
     group = vim.g.tailwind_fold.conceal_au,
     pattern = vim.g.tailwind_fold.ft_to_pattern,
@@ -52,9 +56,14 @@ function M.enable()
   end
 
   config.state.enabled = true
+  config.state.initialized = true
+
+  if not was_enabled then config.options.on_toggle(config.state.enabled) end
 end
 
 function M.disable()
+  if not config.state.enabled then return end
+
   vim.wo.conceallevel = 0
   vim.api.nvim_clear_autocmds({
     group = vim.g.tailwind_fold.conceal_au,
@@ -69,6 +78,8 @@ function M.disable()
 
   config.state.active_buffers = {}
   config.state.enabled = false
+  config.state.initialized = true
+  config.options.on_toggle(config.state.enabled)
 end
 
 M.toggle = function()

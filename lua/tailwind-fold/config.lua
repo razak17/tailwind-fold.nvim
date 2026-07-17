@@ -67,6 +67,7 @@ M.options = {
   enabled = true,
   -- Only fold when class string char count is more than min_chars. Folds everything by default.
   min_chars = 0,
+  on_toggle = function(enabled) end,
   ft = {
     "astro",
     "blade",
@@ -93,6 +94,7 @@ M.options = {
 
 M.state = {
   enabled = false,
+  initialized = false,
   active_buffers = {},
 }
 

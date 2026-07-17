@@ -62,6 +62,8 @@ return {
 	highlight = {
 		fg = "#38BDF8", -- [[ symbol color ]]
 	},
+    on_toggle = function(enabled)
+    end,
 	ft = {
 		"html",
 		"svelte",
@@ -90,6 +92,8 @@ return {
 The plugin is activated automatically
 
 `:TailwindFoldDisable`, `:TailwindFoldEnable` and `:TailwindFoldToggle` are also available to change fold state.
+
+`on_toggle(enabled)` runs once during setup with the initial enabled state, then after each enabled-state change.
 
 # Development and Contributions
 
